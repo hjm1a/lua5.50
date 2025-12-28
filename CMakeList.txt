@@ -1,24 +1,25 @@
 cmake_minimum_required(VERSION 3.10.0)
 
-set(Proj_Name "mylua")
+set(Proj_Name "lua")
 project(${Proj_Name})
 
-set(CMAKE_C_STANDARD 90) # 使用C98/ANSI C
+set(CMAKE_C_STANDARD 90) 
 
-include_directories("src") # 设置头文件搜索目录
+include_directories("src") 
 
-aux_source_directory("src" Lua_Lib_Src) #遍历src目录的源码文件, 存放在变量${Lua_Lib_Src}上
-list(REMOVE_ITEM Lua_Lib_Src "src/lua.c") #删掉${Lua_Lib_Src}中的src/lua.c条目
+aux_source_directory("src" Lua_Lib_Src) 
+list(REMOVE_ITEM Lua_Lib_Src "src/lua.c") 
 
 file(GLOB Lua_Src "src/lua.c")
 
-aux_source_directory("src" Luac_Src) #遍历src目录的源码文件, 存放在变量${Luac_Src}上
+aux_source_directory("src" Luac_Src) 
 list(REMOVE_ITEM Luac_Src "src/lua.c")
 
-add_definitions(-DLUA_BUILD_AS_DLL) #定义宏LUA_BUILD_AS_DLL
+add_definitions(-DLUA_BUILD_AS_DLL)
 
-add_library("lua51" SHARED ${Lua_Lib_Src}) # 源码编译生成动态库
-#add_library("lua51_s" STATIC ${Lua_Lib_Src}) # 源码编译生成静态库
+add_library("lua55" SHARED ${Lua_Lib_Src}) 
+#add_library("lua55_s" STATIC ${Lua_Lib_Src}) 
 
-add_executable("lua" ${Lua_Src}) # 生成exe文件target_link_libraries("lua" "lua51") # 目标lua的库文件搜索路径
-add_executable("luac" ${Luac_Src}) # 生成可执行文件
+add_executable("lua" ${Lua_Src}) 
+add_executable("luac" ${Luac_Src})
+#END
